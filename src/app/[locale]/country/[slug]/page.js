@@ -13,6 +13,59 @@ async function getCountry(slug, locale) {
   return res.json();
 }
 
+export async function generateMetadata({ params: { slug, locale } }) {
+  const data = await getCountry(slug, locale);
+  const SEO = data?.SEO;
+
+  return {
+    metadataBase: new URL("https://imguru.ae"),
+    title: data?.title || "Imguru - Country",
+    description: SEO?.metaDescription || "Blog post description",
+    keywords: SEO?.metaKeywords || "Imguru,Country",
+    authors: [{ name: data?.author?.name || "Author" }],
+    openGraph: {
+      title: SEO?.OGtitle || data?.blog?.title,
+      description: SEO?.OGdescription || SEO?.metaDescription,
+      url: `/${locale}/country/${slug}`,
+      siteName: "Immigrations Guru",
+      images: [
+        {
+          url: data?.mainImage,
+          width: 800,
+          height: 450,
+        },
+      ],
+      locale: locale,
+      type: "article",
+    },
+    icons: {
+      icon: "https://imguru.ae/favicon.ico",
+      apple: "https://imguru.ae/favicon.ico",
+    },
+    alternates: {
+      canonical: `/${locale}/country/${data?.slug}`,
+      languages: {
+        en: `https://imguru.ae/en/country/${data?.slug}`,
+        es: `https://imguru.ae/es/country/${data?.slug}`,
+        zh: `https://imguru.ae/zh/country/${data?.slug}`,
+        ar: `https://imguru.ae/ar/country/${data?.slug}`,
+        fr: `https://imguru.ae/fr/country/${data?.slug}`,
+        de: `https://imguru.ae/de/country/${data?.slug}`,
+        pt: `https://imguru.ae/pt/country/${data?.slug}`,
+        ja: `https://imguru.ae/ja/country/${data?.slug}`,
+        ru: `https://imguru.ae/ru/country/${data?.slug}`,
+        ko: `https://imguru.ae/ko/country/${data?.slug}`,
+        hi: `https://imguru.ae/hi/country/${data?.slug}`,
+        it: `https://imguru.ae/it/country/${data?.slug}`,
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
 export default async function Page({ params: { locale, slug } }) {
   const country = await getCountry(slug, locale);
 
