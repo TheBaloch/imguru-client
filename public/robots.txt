@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blog.nattynyc.com/api/sitemap.txt
+Sitemap: https://imguru.ae/api/sitemap.txt
