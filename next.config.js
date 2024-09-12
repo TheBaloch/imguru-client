@@ -11,6 +11,9 @@ module.exports = {
       {
         hostname: "images.buzznfinds.com",
       },
+      {
+        hostname: "images.imguru.ae",
+      },
     ],
   },
 };
