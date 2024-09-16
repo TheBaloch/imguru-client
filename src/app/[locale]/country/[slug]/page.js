@@ -7,7 +7,7 @@ async function getCountry(slug, locale) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/country/${slug}?lang=${locale}`,
     {
-      cache: "no-cache",
+      cache: "force-cache",
     }
   );
   if (!res.ok) {
