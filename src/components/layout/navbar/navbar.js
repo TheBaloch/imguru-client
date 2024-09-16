@@ -1,113 +1,128 @@
+"use client";
 import initTranslations from "@/app/i18n";
 import LanguageChanger from "@/components/Language/languageChanger";
+import LanguageSwitcher from "@/components/Language/languageSwitcher";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
-export default async function Navbar({ locale }) {
-  const { t } = await initTranslations(locale, ["common"]);
+export default function Navbar({ locale }) {
+  //const { t } = await initTranslations(locale, ["common"]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="bg-white shadow-md border-b">
-      <div className="max-w-screen mx-auto p-2">
-        <div className="flex justify-between">
-          <div className="p-2">
-            <Link href="/">
-              <Image
-                width="140"
-                height="60"
-                src="/images/logo.png"
-                alt="Logo"
-              />
-            </Link>
-          </div>
+    <header className="relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-50" />
+      <nav className="relative bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex-shrink-0 flex items-center">
+              <span className="text-2xl font-bold text-blue-800">
+                imguru<span className="text-gray-700">.ae</span>
+              </span>
+            </div>
+            <div className="hidden md:ml-6 md:flex md:space-x-8">
+              <Link
+                href="/country"
+                className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+              >
+                All Countries
+              </Link>
+            </div>
 
-          <div className="font-medium text-lg hidden sm:-my-px sm:ml-6 sm:hidden md:hidden lg:flex sm:space-x-8 font-mono">
-            <Link
-              href="/skincare"
-              className="text-gray-700 hover:text-gray-600 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-600"
-            >
-              {t("skincare")}
-            </Link>
-            <Link
-              href="haircare"
-              className="text-gray-700 hover:text-gray-600 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-600"
-            >
-              {t("haircare")}
-            </Link>
-            <Link
-              href="/fragrance"
-              className="text-gray-700 hover:text-gray-600 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-600"
-            >
-              {t("fragrance")}
-            </Link>
-            <Link
-              href="/supplements"
-              className="text-gray-700 hover:text-gray-600 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-600"
-            >
-              {t("supplements")}
-            </Link>
-            <Link
-              href="/beauty"
-              className="text-gray-700 hover:text-gray-600 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-600"
-            >
-              {t("beauty")}
-            </Link>
-          </div>
+            <div className="hidden md:flex">
+              <LanguageChanger />
+            </div>
 
-          <div className="p-2">
-            {/* <div className="relative">
-              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="What are you looking for ?"
-                className="pl-10 pr-4 py-2 border rounded-full w-64 bg-gray-100"
-              />
-            </div> */}
-            <LanguageChanger />
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={toggleMenu}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              >
+                <span className="sr-only">Open main menu</span>
+                {isMenuOpen ? (
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-  );
-}
 
-function MenuIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  );
-}
-
-function SearchIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="md:hidden">
+            <div className="pt-2 pb-3 space-y-1">
+              <Link
+                href="#"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              >
+                Passport index
+              </Link>
+              <Link
+                href="#"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              >
+                Visa free countries
+              </Link>
+              <Link
+                href="#"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              >
+                Visa
+              </Link>
+              <Link
+                href="#"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              >
+                Immigration visa
+              </Link>
+              <Link
+                href="#"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              >
+                eTA
+              </Link>
+              <Link
+                href="#"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              >
+                Golden Visa
+              </Link>
+            </div>
+            <div className="pt-4 pb-3 border-t border-gray-200 flex justify-items-end grid">
+              <LanguageChanger />
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 }

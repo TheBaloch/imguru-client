@@ -1,4 +1,7 @@
 import Image from "next/image";
+import styles from "./page.module.css";
+import initTranslations from "@/app/i18n";
+import Link from "next/link";
 
 async function getCountry(slug, locale) {
   const res = await fetch(
@@ -68,10 +71,57 @@ export async function generateMetadata({ params: { slug, locale } }) {
 
 export default async function Page({ params: { locale, slug } }) {
   const country = await getCountry(slug, locale);
+  const { t } = await initTranslations(locale, ["common"]);
 
   if (country)
     return (
       <div className="min-h-screen p-6 bg-gray-50">
+        <nav aria-label="breadcrumb" className="py-2">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600">
+            <li>
+              <Link href="/" className="hover:text-gray-900 hover:underline">
+                Home
+              </Link>
+            </li>
+            <li className="flex items-center space-x-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <Link
+                href="/country"
+                className="hover:text-gray-900 hover:underline"
+              >
+                Countries
+              </Link>
+            </li>
+            <li className="flex items-center space-x-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span href="/country" className="text-gray-900">
+                {country.name}
+              </span>
+            </li>
+          </ol>
+        </nav>
         <section className="max-w-4xl mx-auto">
           {/* Country Main Info */}
           <div className="mb-8">
@@ -108,54 +158,55 @@ export default async function Page({ params: { locale, slug } }) {
           {/* Country Details */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700">
-              Country Details
+              {t("country-details")}
             </h2>
             <div className="grid grid-cols-2 gap-4 text-gray-600">
               <p>
-                <span className="font-semibold">ISO Alpha 2 Code:</span>{" "}
+                <span className="font-semibold">{t("iso-alpha-2-code")}:</span>{" "}
                 {country.isoAlpha2Code}
               </p>
               <p>
-                <span className="font-semibold">ISO Alpha 3 Code:</span>{" "}
+                <span className="font-semibold">{t("iso-alpha-3-code")}:</span>{" "}
                 {country.isoAlpha3Code}
               </p>
               <p>
-                <span className="font-semibold">ISO Numeric Code:</span>{" "}
+                <span className="font-semibold">{t("iso-numeric-code")}:</span>{" "}
                 {country.isoNumericCode}
               </p>
               <p>
-                <span className="font-semibold">Rank:</span> {country.rank}
+                <span className="font-semibold">{t("rank")}:</span>{" "}
+                {country.rank}
               </p>
               <p>
-                <span className="font-semibold">Currency:</span>{" "}
+                <span className="font-semibold">{t("currency")}:</span>{" "}
                 {country.currency}
               </p>
               <p>
-                <span className="font-semibold">Area (km²):</span>{" "}
+                <span className="font-semibold">{t("area")} (km²):</span>{" "}
                 {country.areaKm2}
               </p>
               <p>
-                <span className="font-semibold">Time Zone:</span>{" "}
+                <span className="font-semibold">{t("time-zone")}:</span>{" "}
                 {country.timeZone}
               </p>
               <p>
-                <span className="font-semibold">Calling Code:</span>{" "}
+                <span className="font-semibold">{t("calling-code")}:</span>{" "}
                 {country.callingCode}
               </p>
               <p>
-                <span className="font-semibold">Internet TLD:</span>{" "}
+                <span className="font-semibold">{t("internet-tld")}:</span>{" "}
                 {country.internetTLD}
               </p>
               <p>
-                <span className="font-semibold">Government Type:</span>{" "}
+                <span className="font-semibold">{t("government-type")}:</span>{" "}
                 {country.governmentType}
               </p>
               <p>
-                <span className="font-semibold">Independence Day:</span>{" "}
+                <span className="font-semibold">{t("independence-day")}:</span>{" "}
                 {country.independenceDay}
               </p>
               <p>
-                <span className="font-semibold">Driving Side:</span>{" "}
+                <span className="font-semibold">{t("driving-side")}:</span>{" "}
                 {country.drivingSide}
               </p>
             </div>
@@ -163,7 +214,9 @@ export default async function Page({ params: { locale, slug } }) {
 
           {/* Tags */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">Tags</h2>
+            <h2 className="text-2xl font-semibold text-gray-700">
+              {t("tags")}
+            </h2>
             <div className="flex flex-wrap gap-2">
               {country.tags.map((tag) => (
                 <span
@@ -179,27 +232,27 @@ export default async function Page({ params: { locale, slug } }) {
           {/* Additional Information */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700">
-              Additional Information
+              {t("additional-information")}
             </h2>
             <div className="grid grid-cols-2 gap-4 text-gray-600">
               <p>
-                <span className="font-semibold">Capital City:</span>{" "}
+                <span className="font-semibold">{t("capital-city")}:</span>{" "}
                 {country.capitalCity}
               </p>
               <p>
-                <span className="font-semibold">Continent:</span>{" "}
+                <span className="font-semibold">{t("continent")}:</span>{" "}
                 {country.continent}
               </p>
               <p>
-                <span className="font-semibold">Official Religion:</span>{" "}
+                <span className="font-semibold">{t("official-religion")}:</span>{" "}
                 {country.officialReligion}
               </p>
               <p>
-                <span className="font-semibold">Official Language:</span>{" "}
+                <span className="font-semibold">{t("official-language")}:</span>{" "}
                 {country.officialLanguage}
               </p>
               <p>
-                <span className="font-semibold">Life Expectancy:</span>{" "}
+                <span className="font-semibold">{t("life-expectancy")}:</span>{" "}
                 {country.lifeExpectancy}
               </p>
             </div>
@@ -207,34 +260,35 @@ export default async function Page({ params: { locale, slug } }) {
 
           {/* Overview and Content */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">Overview</h2>
+            <h2 className="text-2xl font-semibold text-gray-700">
+              {t("overview")}
+            </h2>
             <p className="text-gray-600">{country.overview}</p>
           </div>
 
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700">
-              Introduction
+              {t("introduction")}
             </h2>
             <p className="text-gray-600">{country.introduction}</p>
           </div>
 
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">Climate</h2>
+            <h2 className="text-2xl font-semibold text-gray-700">
+              {t("climate")}
+            </h2>
             <p className="text-gray-600">{country.climate}</p>
           </div>
 
           {/* History and Culture */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">History</h2>
+          <div className={styles.html}>
             <div
               className="text-gray-600"
               dangerouslySetInnerHTML={{ __html: country.history }}
             />
           </div>
 
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">Culture</h2>
-
+          <div className={styles.html}>
             <div
               className="text-gray-600"
               dangerouslySetInnerHTML={{ __html: country.culture }}
@@ -244,7 +298,7 @@ export default async function Page({ params: { locale, slug } }) {
           {/* Major Industries and Cities */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700">
-              Major Industries
+              {t("major-industries")}
             </h2>
             <div className="flex flex-wrap gap-2">
               {country.majorIndustries.map((name, i) => (
@@ -260,7 +314,7 @@ export default async function Page({ params: { locale, slug } }) {
 
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700">
-              Major Cities
+              {t("major-cities")}
             </h2>
             <div className="space-y-4">
               {country.majorCities.map((city, i) => (
@@ -276,7 +330,9 @@ export default async function Page({ params: { locale, slug } }) {
 
           {/* Fun and Weird Facts */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">Fun Facts</h2>
+            <h2 className="text-2xl font-semibold text-gray-700">
+              {t("fun-facts")}
+            </h2>
             <div className="space-y-4">
               {country.funFacts.map((f, i) => (
                 <div key={i} className="bg-teal-50 p-4 rounded-lg shadow-sm">
@@ -291,7 +347,7 @@ export default async function Page({ params: { locale, slug } }) {
 
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700">
-              Weird Facts
+              {t("weird-facts")}
             </h2>
             <div className="space-y-4">
               {country.weirdFacts.map((f, i) => (
@@ -306,26 +362,21 @@ export default async function Page({ params: { locale, slug } }) {
           </div>
 
           {/* Current Affairs and Tourist Attractions */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">
-              Current Affairs
-            </h2>
+          <div className={styles.html}>
             <div
               className="text-gray-600"
               dangerouslySetInnerHTML={{ __html: country.currentAffairs }}
             />
           </div>
 
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-700">
-              Tourist Attractions
-            </h2>
+          <div className={styles.html}>
             <div
               className="text-gray-600"
               dangerouslySetInnerHTML={{ __html: country.touristAttractions }}
             />
           </div>
         </section>
+        <div className="mt-16 mb-16"></div>
       </div>
     );
 }
