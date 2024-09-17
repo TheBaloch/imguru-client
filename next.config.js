@@ -1,8 +1,6 @@
 module.exports = {
   assetPrefix:
-    process.env.NODE_ENV === "production"
-      ? "https://sitenattyblog.b-cdn.net"
-      : "",
+    process.env.NODE_ENV === "production" ? "https://cdn.imguru.ae" : "",
   images: {
     remotePatterns: [
       {
