@@ -5,8 +5,9 @@ import { Phone, Mail, MapPin } from "lucide-react";
 
 export default async function Footer({ locale }) {
   const { t } = await initTranslations(locale, ["common"]);
+  //bg-[#0a0a3d]
   return (
-    <footer className="bg-[#0a0a3d] text-white py-12">
+    <footer className=" bg-blue-900 text-white pt-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Logo and Contact Info */}
@@ -90,10 +91,18 @@ export default async function Footer({ locale }) {
             </button>
           </div>
         </div>
-
-        {/* Copyright */}
-        <div className="mt-12 text-center text-sm opacity-70">
-          Copyright © ImGuru | All Right Reserved
+      </div>
+      <div className="flex flex-col gap-2 sm:flex-row py-4 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white mt-10">
+        <p className="text-xs text-gray-500 ">
+          © 2024 Imguru. All rights reserved.
+        </p>
+        <div className="sm:ml-auto flex gap-4 sm:gap-6 text-gray-900">
+          <Link className="text-xs hover:underline underline-offset-4" href="#">
+            Terms of Service
+          </Link>
+          <Link className="text-xs hover:underline underline-offset-4" href="#">
+            Privacy
+          </Link>
         </div>
       </div>
     </footer>

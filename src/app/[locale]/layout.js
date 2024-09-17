@@ -33,16 +33,16 @@ export default async function RootLayout({ children, params: { locale } }) {
             crossOrigin="anonymous"
           ></script>
         </head> */}
-        <GoogleTagManager gtmId="GTM-59G8C6WF" />
+        {/* <GoogleTagManager gtmId="GTM-59G8C6WF" /> */}
         <body>
-          <noscript>
+          {/* <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-59G8C6WF"
               height="0"
               width="0"
               style={{ display: "none", visibility: "hidden" }}
             ></iframe>
-          </noscript>
+          </noscript> */}
 
           <Navbar locale={locale} />
           {/* <Header /> */}

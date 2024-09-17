@@ -14,7 +14,7 @@ const i18nConfig = {
     "it",
   ],
   defaultLocale: "en",
-  prefixDefault: true,
+  //prefixDefault: true,
 };
 
 module.exports = i18nConfig;
