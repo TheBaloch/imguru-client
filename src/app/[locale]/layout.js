@@ -7,7 +7,7 @@ import TranslationsProvider from "@/contexts/TranslationsProvider";
 import Header from "@/components/layout/header/header";
 
 export const metadata = {
-  title: "NattyNYC Blogs",
+  title: "Imguru",
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
@@ -26,13 +26,13 @@ export default async function RootLayout({ children, params: { locale } }) {
       resources={resources}
     >
       <html lang={locale}>
-        {/* <head>
+        <head>
           <script
             async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4175702648008089"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3642221070800642"
             crossOrigin="anonymous"
           ></script>
-        </head> */}
+        </head>
         {/* <GoogleTagManager gtmId="GTM-59G8C6WF" /> */}
         <body>
           {/* <noscript>
