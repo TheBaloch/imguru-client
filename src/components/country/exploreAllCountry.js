@@ -17,7 +17,7 @@ export default function ExploreAllCountries() {
             </div>
             <div className="w-full max-w-sm space-y-2">
               <Link
-                href="/countries"
+                href="/country"
                 className="w-full inline-block text-center px-6 py-3 text-lg font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 View All Countries

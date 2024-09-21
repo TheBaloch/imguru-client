@@ -20,7 +20,9 @@ export default function Navbar({ locale }) {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0 flex items-center">
               <span className="text-2xl font-bold text-blue-800">
-                imguru<span className="text-gray-700">.ae</span>
+                <Link href="/">
+                  imguru<span className="text-gray-700">.ae</span>
+                </Link>
               </span>
             </div>
             <div className="hidden md:ml-6 md:flex md:space-x-8">
