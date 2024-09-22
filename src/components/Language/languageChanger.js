@@ -51,7 +51,7 @@ export default function LanguageChanger() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <button
         onClick={() => setLanguageDropdown(!languageDropdown)}
         className="bg-white text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
