@@ -1,6 +1,8 @@
 import CountrySearchBlock from "@/components/search/country/countrySearchBlock";
 import ExploreAllCountries from "@/components/country/exploreAllCountry";
 import CountryBlock from "@/components/country/countryBlock";
+import PassportBlock from "@/components/passport/passportBlock";
+import ExploreAllPassports from "@/components/passport/exportAllPassport";
 
 // const translations = {
 //   en: {
@@ -99,11 +101,11 @@ export async function generateMetadata({ params: { locale } }) {
   //const translation = translations[locale] || translations.en;
 
   return {
-    title: "Imguru",
+    title: "Imguru - Home",
     authors: [{ name: "Immigrations Guru Team" }],
     openGraph: {
       url: `https://imguru.ae/${locale}`,
-      siteName: "Immigrations Guru",
+      siteName: "Imguru",
       images: [
         {
           url: "https://imguru.ae/favicon.ico",
@@ -140,6 +142,8 @@ export default function Home({ params: { locale } }) {
       <CountrySearchBlock />
       <CountryBlock locale={locale} limit={10} page={2} />
       <ExploreAllCountries />
+      <PassportBlock locale={locale} limit={10} page={1} />
+      <ExploreAllPassports />
     </main>
   );
 }

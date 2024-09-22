@@ -30,7 +30,13 @@ export default function Navbar({ locale }) {
                 href="/country"
                 className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
               >
-                All Countries
+                Countries
+              </Link>
+              <Link
+                href="/passport"
+                className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+              >
+                Passports
               </Link>
             </div>
 
