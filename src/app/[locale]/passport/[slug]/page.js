@@ -99,10 +99,10 @@ export default async function Page({ params: { slug, locale } }) {
                 />
               </svg>
               <Link
-                href="/country"
+                href="/passport"
                 className="hover:text-gray-900 hover:underline"
               >
-                Countries
+                Passports
               </Link>
             </li>
             <li className="flex items-center space-x-2">
