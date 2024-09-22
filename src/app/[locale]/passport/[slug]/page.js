@@ -269,10 +269,12 @@ function VisaSection({ title, countries }) {
   );
 }
 
-const StyledContent = ({ html }) => (
-  <div
-    dangerouslySetInnerHTML={{ __html: html }}
-    className="prose max-w-none
+const StyledContent = ({ html }) => {
+  if (!html) return <></>;
+  return (
+    <div
+      dangerouslySetInnerHTML={{ __html: html }}
+      className="prose max-w-none
         [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:text-gray-900
         [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mb-3 [&_h2]:text-gray-800
         [&_h3]:text-xl [&_h3]:font-medium [&_h3]:mb-2 [&_h3]:text-gray-700
@@ -289,5 +291,6 @@ const StyledContent = ({ html }) => (
         [&_th]:bg-gray-100 [&_th]:border [&_th]:border-gray-300 [&_th]:px-4 [&_th]:py-2 [&_th]:text-left
         [&_td]:border [&_td]:border-gray-300 [&_td]:px-4 [&_td]:py-2
         [&_hr]:my-8 [&_hr]:border-t [&_hr]:border-gray-300"
-  />
-);
+    />
+  );
+};
